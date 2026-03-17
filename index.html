@@ -13,7 +13,7 @@
   --ink-50:      #6b6b78;
   --ink-20:      #c8c8d0;
   --ink-08:      #f0f0f3;
-  --ink-04:      #f8f8fa;
+  --ink-04:      #f8f8fa
   --line:        #e6e6ec;
   --white:       #ffffff;
   --green:       #00875a;
@@ -377,7 +377,7 @@ function counter(el, from, to, ms, fmt) {
   requestAnimationFrame(run);
 }
 function parseNum(el, strip='') {
-  return parseFloat((el.textContent||'''').replace(strip,'').replace(/[¥,%,]/g,'')) || 0;
+  return parseFloat((el.textContent||'').replace(strip,'').replace(/[¥,%,]/g,'')) || 0;
 }
 
 /* ── BAR CHART (CV) ── */
@@ -457,8 +457,8 @@ function updateKPI(week) {
   const impF  = parseNum(impEl)||0;
   const totF  = parseNum(totEl)||0;
   const cpaFv = parseNum(effCpa)||0;
-  const ctrF  = parseFloat((effCtr.textContent||'''').replace('%',''))||0;
-  const cvrF  = parseFloat((effCvr.textContent||'''').replace('%',''))||0;
+  const ctrF  = parseFloat((effCtr.textContent||'').replace('%',''))||0;
+  const cvrF  = parseFloat((effCvr.textContent||'').replace('%',''))||0;
   const clkF  = parseNum(effClk)||0;
 
   counter(cvEl,   cvF,   d.cv,       440, v=>v.toFixed(2));
