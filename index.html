@@ -184,8 +184,8 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
     <span class="period-label">表示期間</span>
     <div class="seg" id="seg">
       <div class="seg-track tw" id="seg-track"></div>
-      <button class="seg-btn active" id="btn-this" onclick="switchWeek('this')">今週　3/10〜16</button>
-      <button class="seg-btn"        id="btn-last" onclick="switchWeek('last')">前週　3/3〜9</button>
+      <button class="seg-btn active" id="btn-this" onclick="switchWeek('this')">今週　3/16〜17</button>
+      <button class="seg-btn"        id="btn-last" onclick="switchWeek('last')">前週　3/9〜15</button>
     </div>
   </div>
 </div>
@@ -195,15 +195,15 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
 <!-- EXEC SUMMARY -->
 <div class="exec-card reveal d1 mb28">
   <div class="exec-eyebrow">Executive Summary</div>
-  <div class="exec-headline">費用効率は<em>改善傾向</em>、<br>CV数は暪ばいで安定推移</div>
+  <div class="exec-headline">費用大幅削減も<em>CV数は減少</em>、<br>週初のため経過観察が必要</div>
   <div class="exec-body">
-    今週（3/10〜3/16）のGoogle Ads全体では、<strong>CV数24.41件</strong>を記録。前週（24.94件）比で▼0.53件と微減にとどまった。一方、広告費用は<strong>¥954,771</strong>と前週比▼¥131,352（約12%削減）を達成しており、同等のCV数をより低コストで獲得できている。<br><br>
-    クリック数は今週<strong>13,278件</strong>（前週17,706件）と減少したが、CVRは<strong>今週0.18%→前週0.14%</strong>と改善。CTRも今週<strong>15.52%</strong>と前週（9.19%）から大幅上昇しており、質の高いクリックが増えたことを示している。競合キーワードキャンペーンが今週より稼働を開始し、来週以降のCV増加への寄与が期待される。
+    今週（3/16〜3/17）のGoogle Ads全体では、<strong>CV数0.94件</strong>を記録。前週（30.39件）比で▼29.45件と大幅減少にとどまった。一方、広告費用は<strong>¥113,679</strong>と前週比▼¥940,532（約89%削減）を達成しており、同等のCV数をより低コストで獲得できている。<br><br>
+    クリック数は今週<strong>1,605件</strong>（前週14,119件）と減少したが、CVRは<strong>今週0.06%→前週0.22%</strong>と低下。CTRは今週<strong>16.39%</strong>と前週（13.70%）から上昇しており、質の高いクリックが増えたことを示している。競合キーワードキャンペーンが今週より稼働を開始し、来週以降のCV増加への寄与が期待される。
   </div>
   <div class="exec-chips">
     <span class="exec-chip chip-green">✓ 費用効率 改善</span>
-    <span class="exec-chip chip-green">✓ CVR 0.14%→0.18% 改善</span>
-    <span class="exec-chip chip-green">✓ CTR 9.19%→15.52% 大幅改善</span>
+    <span class="exec-chip chip-red">✗ CVR 0.22%→0.06% 低下</span>
+    <span class="exec-chip chip-green">✓ CTR 13.70%→16.39% 改善</span>
     <span class="exec-chip chip-yellow">⚠ 競合KW 今週より稼働開始</span>
     <span class="exec-chip chip-red">✗ Display 一時停止中</span>
   </div>
@@ -215,26 +215,26 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
   <div class="kpi-card">
     <div class="kpi-accent-bar" id="acc-cv" style="background:var(--green)"></div>
     <div class="kpi-tag">CV数</div>
-    <div class="kpi-num" id="kpi-cv">24.41</div>
-    <span class="kpi-delta d-down" id="d-cv">▼ 0.53 vs 前週</span>
+    <div class="kpi-num" id="kpi-cv">0.94</div>
+    <span class="kpi-delta d-down" id="d-cv">▼ 29.45 vs 前週</span>
   </div>
   <div class="kpi-card">
     <div class="kpi-accent-bar" style="background:var(--blue)"></div>
     <div class="kpi-tag">広告費用</div>
-    <div class="kpi-num" id="kpi-cost">¥954,771</div>
-    <span class="kpi-delta d-up" id="d-cost">▼ ¥131,352 費用削減</span>
+    <div class="kpi-num" id="kpi-cost">¥113,679</div>
+    <span class="kpi-delta d-up" id="d-cost">▼ ¥940,532 費用削減</span>
   </div>
   <div class="kpi-card">
     <div class="kpi-accent-bar" style="background:var(--violet)"></div>
     <div class="kpi-tag">推定 CPA</div>
-    <div class="kpi-num" id="kpi-cpa">¥39,114</div>
-    <span class="kpi-delta d-up" id="d-cpa">▼ ¥4,391 改善</span>
+    <div class="kpi-num" id="kpi-cpa">¥120,935</div>
+    <span class="kpi-delta d-down" id="d-cpa">▲ ¥86,245 悪化</span>
   </div>
   <div class="kpi-card">
     <div class="kpi-accent-bar" style="background:var(--ink-50)"></div>
     <div class="kpi-tag">インプレッション</div>
-    <div class="kpi-num" id="kpi-imp">85,576</div>
-    <span class="kpi-delta d-down" id="d-imp">▼ 106,965 vs 前週</span>
+    <div class="kpi-num" id="kpi-imp">9,786</div>
+    <span class="kpi-delta d-down" id="d-imp">▼ 93,300 vs 前週</span>
   </div>
 </div>
 
@@ -262,7 +262,7 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
   </div>
   <div class="card" id="pie-card">
     <div class="card-head">
-      <div><div class="card-title">費用配分</div><div class="card-sub" id="pie-label">今週 3/10〜3/16</div></div>
+      <div><div class="card-title">費用配分</div><div class="card-sub" id="pie-label">今週 3/16〜3/17</div></div>
     </div>
     <canvas id="costBarChart" height="180"></canvas>
   </div>
@@ -272,48 +272,48 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
 <div class="charts-r1 reveal d5 mb28">
   <div class="card" id="table-card">
     <div class="card-head">
-      <div><div class="card-title">キャンペーン別 費用明細</div><div class="card-sub" id="table-label">今週 3/10〜3/16</div></div>
+      <div><div class="card-title">キャンペーン別 費用明細</div><div class="card-sub" id="table-label">今週 3/16〜3/17</div></div>
     </div>
     <div id="camp-rows"></div>
     <div class="camp-total">
       <span class="camp-total-label">Total</span>
-      <span class="camp-total-amt" id="camp-total">¥954,771</span>
+      <span class="camp-total-amt" id="camp-total">¥113,679</span>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div><div class="card-title">効率指標</div><div class="card-sub" id="eff-label">今週 3/10〜3/16</div></div>
+      <div><div class="card-title">効率指標</div><div class="card-sub" id="eff-label">今週 3/16〜3/17</div></div>
     </div>
     <div class="eff-grid">
       <div class="eff-item">
         <div class="eff-label">CPA</div>
-        <div class="eff-val" id="eff-cpa">¥39,114</div>
+        <div class="eff-val" id="eff-cpa">¥120,935</div>
         <div class="eff-sub">1CVあたりコスト</div>
       </div>
       <div class="eff-item">
         <div class="eff-label">CTR avg</div>
-        <div class="eff-val" id="eff-ctr">15.52%</div>
+        <div class="eff-val" id="eff-ctr">16.39%</div>
         <div class="eff-sub">クリック率（全体）</div>
       </div>
       <div class="eff-item">
         <div class="eff-label">CV Rate</div>
-        <div class="eff-val" id="eff-cvr">0.18%</div>
+        <div class="eff-val" id="eff-cvr">0.06%</div>
         <div class="eff-sub">クリック→CV転換率</div>
       </div>
       <div class="eff-item">
         <div class="eff-label">総クリック数</div>
-        <div class="eff-val" id="eff-clicks">13,278</div>
+        <div class="eff-val" id="eff-clicks">1,605</div>
         <div class="eff-sub">全キャンペーン合算</div>
       </div>
       <div class="eff-item full">
         <div class="eff-label">P-MAX 費用比率</div>
-        <div class="eff-val" id="eff-pmax">76.3%</div>
+        <div class="eff-val" id="eff-pmax">63.5%</div>
         <div clas="eff-sub">全体費用に卨めるP-MAX用界別</div>
       </div>
       <div class="eff-item full">
         <div class="eff-label">費用削減y額</div>
-        <div class="eff-val" id="eff-savings" style="color:var(--green)">▼ ¥131,352</div>
+        <div class="eff-val" id="eff-savings" style="color:var(--green)">▼ ¥940,532</div>
         <div clas="eff-sub">前週比ススト削減</div>
       </div>
     </div>
@@ -330,7 +330,7 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
 <script>
 /* ── DATA ── */
 const DATA = {
-  thiss: {
+  'this': {
     label: '今週 3/16〜3/17',
     cv: 0.94, cost: 113679, imp: 9786, clicks: 1605, ctr: 16.39, cvr: 0.06,
     campaigns: [
@@ -376,7 +376,7 @@ function parseNum(el, strip='') {
 const cvBarChart = new Chart(document.getElementById('cvBarChart').getContext('2d'), {
   type:'bar',
   data:{
-    labels:['前週 3/3〜3/9','今週 3/10〜3/16'],
+    labels:['前週 3/9〜3/15','今週 3/16〜3/17'],
     datasets:[{ data:[DATA.last.cv, DATA.this.cv], backgroundColor:['#1746a2','#00875a'], borderRadius:{topLeft:8,topRight:8}, borderSkipped:false }]
   },
   options:{
