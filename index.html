@@ -92,11 +92,13 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
 
 /* KPI ROW */
 .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }
-.kpi-card { background:var(--white); border:1px solid var(--line); border-radius:var(--r-md); padding:20px 20px 18px; position:relative; box-shadow:var(--sh-xs); transition:box-shadow .2s, transform .2s; cursor:default; }
+.kpi-card { background:var(--white); border:1px solid var(--line); border-radius:var(--r-md); padding:20px 20px 14px; position:relative; box-shadow:var(--sh-xs); transition:box-shadow .2s, transform .2s; cursor:default; }
 .kpi-card:hover { box-shadow:var(--sh-sm); transform:translateY(-1px); }
 .kpi-accent-bar { position:absolute; top:0; left:20px; right:20px; height:2.5px; border-radius:0 0 3px 3px; transition:background .3s; }
 .kpi-tag { font-size:10px; font-weight:600; font-family:var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-50); margin-bottom:14px; margin-top:6px; }
-.kpi-num { font-family:var(--f-mono); font-size:clamp(22px,3vw,32px); font-weight:500; letter-spacing:-.03em; line-height:1; color:var(--ink); margin-bottom:10px; min-height:1.15em; }
+.kpi-num { font-family:var(--f-mono); font-size:clamp(22px,3vw,32px); font-weight:500; letter-spacing:-.03em; line-height:1; color:var(--ink); margin-bottom:8px; min-height:1.15em; }
+.kpi-monthly { font-size:10px; font-family:var(--f-mono); color:var(--ink-50); margin-bottom:6px; }
+.kpi-monthly span { font-weight:600; color:var(--ink-80); }
 .kpi-delta { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:600; font-family:var(--f-mono); padding:3px 8px; border-radius:100px; }
 .d-up   { background:var(--green-light); color:var(--green); }
 .d-down { background:var(--red-light);   color:var(--red);   }
@@ -184,8 +186,8 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
     <span class="period-label">表示期間</span>
     <div class="seg" id="seg">
       <div class="seg-track tw" id="seg-track"></div>
-      <button class="seg-btn active" id="btn-this" onclick="switchWeek('this')">今週　3/16〜17</button>
-      <button class="seg-btn"        id="btn-last" onclick="switchWeek('last')">前週　3/9〜15</button>
+      <button class="seg-btn active" id="btn-this" onclick="switchWeek('this')">今週 3/16〜17</button>
+      <button class="seg-btn"        id="btn-last" onclick="switchWeek('last')">前週 3/9〜15</button>
     </div>
   </div>
 </div>
@@ -216,12 +218,14 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
     <div class="kpi-accent-bar" id="acc-cv" style="background:var(--green)"></div>
     <div class="kpi-tag">CV数</div>
     <div class="kpi-num" id="kpi-cv">0.94</div>
+    <div class="kpi-monthly">3月累計: <span id="kpi-cv-monthly">25.35件</span></div>
     <span class="kpi-delta d-down" id="d-cv">▼ 29.45 vs 前週</span>
   </div>
   <div class="kpi-card">
     <div class="kpi-accent-bar" style="background:var(--blue)"></div>
     <div class="kpi-tag">広告費用</div>
     <div class="kpi-num" id="kpi-cost">¥113,679</div>
+    <div class="kpi-monthly">3月累計: <span id="kpi-cost-monthly">¥2,154,673</span></div>
     <span class="kpi-delta d-up" id="d-cost">▼ ¥940,532 費用削減</span>
   </div>
   <div class="kpi-card">
@@ -309,12 +313,12 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
       <div class="eff-item full">
         <div class="eff-label">P-MAX 費用比率</div>
         <div class="eff-val" id="eff-pmax">63.5%</div>
-        <div clas="eff-sub">全体費用に卨めるP-MAX用界別</div>
+        <div class="eff-sub">全体費用に占めるP-MAX費用比率</div>
       </div>
       <div class="eff-item full">
-        <div class="eff-label">費用削減y額</div>
+        <div class="eff-label">費用削減額</div>
         <div class="eff-val" id="eff-savings" style="color:var(--green)">▼ ¥940,532</div>
-        <div clas="eff-sub">前週比ススト削減</div>
+        <div class="eff-sub">前週比コスト削減</div>
       </div>
     </div>
   </div>
@@ -322,7 +326,7 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
 
 <div class="footer">
   <span>R.E.DATA — TRUSTART Co., Ltd.</span>
-  <span>Claude によるh��動厖廗ガポート（クオックデータ実欬値反抮済み）</span>
+  <span>Claude による自動生成レポート（クリックデータ実測値反映済み）</span>
 </div>
 
 </div></div>
@@ -330,24 +334,30 @@ body { background:var(--ink-04); color:var(--ink); font-family:var(--f-body); -w
 <script>
 /* ── DATA ── */
 const DATA = {
-  'this': {
+  this: {
     label: '今週 3/16〜3/17',
-    cv: 0.94, cost: 113679, imp: 9786, clicks: 1605, ctr: 16.39, cvr: 0.06,
+    cv: 0.94, cost: 113679, imp: 9786, clicks: 1605,
+    ctr: 16.39, cvr: 0.06,
+    monthly_cv: 25.35,
+    monthly_cost: 2154673,
     campaigns: [
-      { name:'指名・指名検索', type:'search', cost:17758, imp:211, clicks:25, ctr:11.85 },
-      { name:'競合キーワード', type:'search', cost:18107, imp:375, clicks:22, ctr:5.87 },
-      { name:'一般 R.E.DATA', type:'search', cost:5635, imp:235, clicks:11, ctr:4.68 },
-      { name:'P-MAX R.E.DATA', type:'pmax', cost:72179, imp:8965, clicks:1547, ctr:17.24 },
+      { name:'指名・指名検索', type:'search', cost:17758,  imp:211,  clicks:25,   ctr:11.85 },
+      { name:'競合キーワード',  type:'search', cost:18107,  imp:375,  clicks:22,   ctr:5.87  },
+      { name:'一般 R.E.DATA',   type:'search', cost:5635,   imp:235,  clicks:11,   ctr:4.68  },
+      { name:'P-MAX R.E.DATA',  type:'pmax',   cost:72179,  imp:8965, clicks:1547, ctr:17.24 },
     ]
   },
   last: {
     label: '前週 3/9〜3/15',
-    cv: 30.39, cost: 1054211, imp: 103086, clicks: 14119, ctr: 13.70, cvr: 0.22,
+    cv: 30.39, cost: 1054211, imp: 103086, clicks: 14119,
+    ctr: 13.70, cvr: 0.22,
+    monthly_cv: null,
+    monthly_cost: null,
     campaigns: [
-      { name:'指名・指名検索', type:'search', cost:53899, imp:835, clicks:87, ctr:10.42 },
-      { name:'競合キーワード', type:'search', cost:118782, imp:3260, clicks:116, ctr:3.56 },
-      { name:'一般 R.E.DATA', type:'search', cost:31090, imp:916, clicks:53, ctr:5.79 },
-      { name:'P-MAX R.E.DATA', type:'pmax', cost:850440, imp:98075, clicks:13863, ctr:14.14 },
+      { name:'指名・指名検索', type:'search', cost:53899,  imp:835,   clicks:87,    ctr:10.42 },
+      { name:'競合キーワード',  type:'search', cost:118782, imp:3260,  clicks:116,   ctr:3.56  },
+      { name:'一般 R.E.DATA',   type:'search', cost:31090,  imp:916,   clicks:53,    ctr:5.79  },
+      { name:'P-MAX R.E.DATA',  type:'pmax',   cost:850440, imp:98075, clicks:13863, ctr:14.14 },
     ]
   }
 };
@@ -369,7 +379,7 @@ function counter(el, from, to, ms, fmt) {
   requestAnimationFrame(run);
 }
 function parseNum(el, strip='') {
-  return parseFloat((el.textContent||'').replace(strip,'').replace(/[¥,%,]/g,'')) || 0;
+  return parseFloat((el.textContent||'''').replace(strip,'').replace(/[¥,%,]/g,'')) || 0;
 }
 
 /* ── BAR CHART (CV) ── */
@@ -381,10 +391,10 @@ const cvBarChart = new Chart(document.getElementById('cvBarChart').getContext('2
   },
   options:{
     responsive:true, animation:{duration:480, easing:'easeInOutQuart'},
-    plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'#0f0f10', titleColor:'#8a8a96', bodyColor:'#fff', padding:14, cornerRadius:10, bodyFont:{family:"'DM Mono',monospace",size:15,weight:'500'}, callbacks:{label:ctx=>'  CV '+ctx.parsed.y.toFixed(2)} } },
+    plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'#0f0f10', titleColor:'#8a8a96', bodyColor:'#fff', padding:14, cornerRadius:10, bodyFont:{family:"'DM Mono',monospace",size:15,weight:'500'}, callbacks:{label:ctx=>' CV '+ctx.parsed.y.toFixed(2)} } },
     scales:{
       x:{ grid:{display:false}, border:{display:false}, ticks:{color:'#6b6b78',font:{family:"'Outfit',sans-serif",size:12}} },
-      y:{ grid:{color:'#f0f0f3'}, border:{display:false}, ticks:{color:'#6b6b78',font:{family:"'DM Mono',monospace",size:11}}, min:22, max:28 }
+      y:{ grid:{color:'#f0f0f3'}, border:{display:false}, ticks:{color:'#6b6b78',font:{family:"'DM Mono',monospace",size:11}}, beginAtZero:true }
     }
   }
 });
@@ -398,7 +408,7 @@ const costBarChart = new Chart(document.getElementById('costBarChart').getContex
   },
   options:{
     responsive:true, animation:{duration:480, easing:'easeInOutQuart'}, indexAxis:'y',
-    plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'#0f0f10', titleColor:'#8a8a96', bodyColor:'#fff', padding:12, cornerRadius:10, bodyFont:{family:"'DM Mono',monospace",weight:'500'}, callbacks:{label:ctx=>'  ¥'+ctx.parsed.x.toLocaleString()} } },
+    plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'#0f0f10', titleColor:'#8a8a96', bodyColor:'#fff', padding:12, cornerRadius:10, bodyFont:{family:"'DM Mono',monospace",weight:'500'}, callbacks:{label:ctx=>' ¥'+ctx.parsed.x.toLocaleString()} } },
     scales:{
       x:{ grid:{color:'#f0f0f3'}, border:{display:false}, ticks:{color:'#6b6b78',font:{family:"'DM Mono',monospace",size:10},callback:v=>'¥'+Math.round(v/1000)+'k'} },
       y:{ grid:{display:false}, border:{display:false}, ticks:{color:'#2a2a2e',font:{family:"'Outfit',sans-serif",size:12,weight:'500'}} }
@@ -440,6 +450,8 @@ function updateKPI(week) {
   const effClk  = document.getElementById('eff-clicks');
   const effPmax = document.getElementById('eff-pmax');
   const effSav  = document.getElementById('eff-savings');
+  const cvMonthly   = document.getElementById('kpi-cv-monthly');
+  const costMonthly = document.getElementById('kpi-cost-monthly');
 
   const cvF   = parseFloat(cvEl.textContent)||0;
   const costF = parseNum(costEl)||0;
@@ -447,8 +459,8 @@ function updateKPI(week) {
   const impF  = parseNum(impEl)||0;
   const totF  = parseNum(totEl)||0;
   const cpaFv = parseNum(effCpa)||0;
-  const ctrF  = parseFloat((effCtr.textContent||'').replace('%',''))||0;
-  const cvrF  = parseFloat((effCvr.textContent||'').replace('%',''))||0;
+  const ctrF  = parseFloat((effCtr.textContent||'''').replace('%',''))||0;
+  const cvrF  = parseFloat((effCvr.textContent||'''').replace('%',''))||0;
   const clkF  = parseNum(effClk)||0;
 
   counter(cvEl,   cvF,   d.cv,       440, v=>v.toFixed(2));
@@ -460,6 +472,20 @@ function updateKPI(week) {
   counter(effCtr, ctrF,  d.ctr,      440, v=>v.toFixed(2)+'%');
   counter(effCvr, cvrF,  d.cvr,      440, v=>v.toFixed(2)+'%');
   counter(effClk, clkF,  d.clicks,   440, v=>Math.round(v).toLocaleString());
+
+  // 月次合計の表示
+  if (d.monthly_cv !== null && cvMonthly) {
+    cvMonthly.textContent = d.monthly_cv.toFixed(2) + '件';
+    cvMonthly.parentElement.style.display = '';
+  } else if (cvMonthly) {
+    cvMonthly.parentElement.style.display = 'none';
+  }
+  if (d.monthly_cost !== null && costMonthly) {
+    costMonthly.textContent = '¥' + d.monthly_cost.toLocaleString();
+    costMonthly.parentElement.style.display = '';
+  } else if (costMonthly) {
+    costMonthly.parentElement.style.display = 'none';
+  }
 
   effPmax.textContent = pmaxRatio(d).toFixed(1)+'%';
   const sav = d.cost - o.cost;
@@ -492,7 +518,7 @@ function updateCharts(week) {
     ? ['rgba(23,70,162,.95)','rgba(0,135,90,.9)']
     : ['rgba(23,70,162,.9)','rgba(0,135,90,.25)'];
   cvBarChart.update();
-  costBarChart.data.datasets[0].data = d.campaigns.map(c=>c.cost);
+ !costBarChart.data.datasets[0].data = d.campaigns.map(c=>c.cost);
   costBarChart.update();
 }
 
